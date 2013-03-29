@@ -39,16 +39,30 @@
 ****************************************************************************/
 
 #include "videoplayer.h"
+#include "sidebar.h"
 
 #include <QtWidgets/QApplication>
+#include "MainWindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    MainWindow window;
+
+    /*
     VideoPlayer player;
     player.resize(320, 240);
     player.show();
+
+
+    SideBar sidebar(&window);
+    sidebar.resize(400, 500);
+
+    window.setCentralWidget(&sidebar);
+    */
+
+    window.show();
 
     return app.exec();
 }
