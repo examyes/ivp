@@ -6,6 +6,8 @@
 #include <QtGui/QMovie>
 #include <QtWidgets/QWidget>
 
+#include "Overlay.h"
+
 QT_BEGIN_NAMESPACE
 class QAbstractButton;
 class QSlider;
@@ -16,7 +18,7 @@ class VideoPlayer : public QWidget
 {
     Q_OBJECT
 public:
-    VideoPlayer(QWidget *parent = 0);
+    VideoPlayer(QWidget *parent = 0, Overlay* _overlay);
     ~VideoPlayer();
     QSize sizeHint() const;
 
@@ -30,9 +32,9 @@ public signals:
      */
     void playTo(int millisecond);
     /*
-     * Emit scanTo whenever slider is moved
+     * Emit seekTo whenever slider is moved
      */
-    void scanTo(int millisecond);
+    void seekTo(int millisecond);
 
 public slots:
     /*
@@ -53,6 +55,7 @@ private:
     QMediaPlayer mediaPlayer;
     QAbstractButton *playButton;
     QSlider *positionSlider;
+    Overlay *overlay;
     //QLabel *errorLabel;
 };
 

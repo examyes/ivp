@@ -25,7 +25,7 @@ public signals:
     void end(MetaEntry* entry);
     /*
      * Emit reset to tell overlay to remove all boxes
-     * When a scanTo happens, we might need to emit reset and emit several begins.
+     * When a seekTo happens, we might need to emit reset and emit several begins.
      */
     void reset();
     /*
@@ -41,7 +41,7 @@ public slots:
      * then emit begin for all meta entries that should be shown
      * at current position
      */
-    void scanTo(int millisecond);
+    void seekTo(int millisecond);
     /*
      * update current position,
      * emit begin and end signals if necessary
