@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -17,7 +17,7 @@ MainWindow::~MainWindow(){
 
 void MainWindow::createWidgets(){
     overlay = new Overlay();
-    videoPlayer = new VideoPlayer(overlay);
+    videoPlayer = new VideoPlayer(0, overlay);
     sideBar = new SideBar();
 
     QHBoxLayout *layout = new QHBoxLayout();
@@ -59,7 +59,7 @@ void MainWindow::open() {
     emit openFile(filename);
 }
 
-void createConnections(){
+void MainWindow::createConnections(){
     connect(this, SIGNAL(openFile(QString)), videoPlayer, SLOT(open(QString)));
     connect(this, SIGNAL(openFile(QString)), meta, SLOT(open(QString)));
 

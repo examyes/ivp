@@ -1,12 +1,18 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QAction>
+#include <QMenuBar>
+#include <QMenu>
 #include <QMainWindow>
 
 #include "VideoPlayer.h"
 #include "Overlay.h"
 #include "SideBar.h"
+#include "MetaInfo.h"
 #include "MetaItem.h"
+#include "MetaEntry.h"
+
 
 class MainWindow : public QMainWindow
 {
@@ -15,7 +21,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-public signals:
+signals:
     /*
      * Emit this signal when user selected a file to open
      * Tell videoplayer to load the file

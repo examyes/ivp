@@ -54,7 +54,7 @@ VideoPlayer::~VideoPlayer() {
     delete videoSize;
 }
 
-void VideoPlayer::openFile(QString fileName)
+void VideoPlayer::open(QString fileName)
 {
     if (!fileName.isEmpty()) {
         mediaPlayer.setMedia(QUrl::fromLocalFile(fileName));
@@ -62,7 +62,7 @@ void VideoPlayer::openFile(QString fileName)
 
         // get video size
         delete videoSize;
-        QSize s = mediaPlayer.media.canonicalResource().resolution();
+        QSize s = mediaPlayer.media().canonicalResource().resolution();
         videoSize = new QSize(s.width(), s.height());
 
         // resize overlay
@@ -72,13 +72,13 @@ void VideoPlayer::openFile(QString fileName)
 
 void VideoPlayer::resizeOverlay(){
     QSize playerSize = videoWidget->size();
-    AspectRatioMode mode = videoWidget->aspectRatioMode();
+    Qt::AspectRatioMode mode = videoWidget->aspectRatioMode();
 
     QSize overlaySize(videoSize->width(), videoSize->height());
     overlaySize.scale(playerSize, mode);
 
-    left = (playerSize.width() - overlaySize.width()) / 2;
-    top = (playerSize.height() - overlaySize.height()) / 2;
+    int left = (playerSize.width() - overlaySize.width()) / 2;
+    int top = (playerSize.height() - overlaySize.height()) / 2;
 
     overlay->setGeometry(left, top, overlaySize.width(), overlaySize.height());
 }

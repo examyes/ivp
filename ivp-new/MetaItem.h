@@ -1,6 +1,8 @@
 #ifndef METAITEM_H
 #define METAITEM_H
 
+#include <QString>
+
 class MetaItem{
 
 public:
@@ -10,6 +12,6 @@ public:
             QString _text);
 
     const QString title, imgURL, text;
-}
+};
 
 #endif

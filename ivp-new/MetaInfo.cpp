@@ -15,10 +15,10 @@ void MetaInfo::seekTo(int millisecond){
     beginIndex = 0;
     endIndex = 0;
     //playTo(millisecond);
-    while (beginIndex < entries.size() && (entries.at(beginIndex))->timestart <= millisecond)
+    while (beginIndex < entries.size() && (entries.at(beginIndex))->timeStart <= millisecond)
         beginIndex ++;
 
-    while (endIndex < entries.size() && (entries.at(endIndex))->timestop <= millisecond)
+    while (endIndex < entries.size() && (entries.at(endIndex))->timeStop <= millisecond)
         endIndex ++;
 
     for (int i = endIndex; i < beginIndex; i++)
@@ -26,11 +26,11 @@ void MetaInfo::seekTo(int millisecond){
 }
 
 void MetaInfo::playTo(int millisecond){
-    while (beginIndex < entries.size() && (entries.at(beginIndex))->timestart <= millisecond){
+    while (beginIndex < entries.size() && (entries.at(beginIndex))->timeStart <= millisecond){
         emit begin(entries.at(beginIndex));
         beginIndex ++;
     }
-    while (endIndex < entries.size() && (entries.at(endIndex))->timestop <= millisecond){
+    while (endIndex < entries.size() && (entries.at(endIndex))->timeStop <= millisecond){
         emit end(entries.at(endIndex));
         endIndex ++;
     }
@@ -43,9 +43,9 @@ void MetaInfo::select(MetaEntry *entry){
 
 void MetaInfo::open(QString filename){
     // remove existing items and entries
-    for(map<int, MetaInfo*>::iterator it= items.begin(); it!= items.end(); it++) 
+    for(map<int, MetaItem*>::iterator it= items.begin(); it!= items.end(); it++)
         delete (it->second);
-    for(vector<MetaEntry*>::iterator it= items.begin(); it!= items.end(); it++) 
+    for(vector<MetaEntry*>::iterator it= entries.begin(); it!= entries.end(); it++)
         delete (*it);
     items.clear();
     entries.clear();
@@ -79,7 +79,7 @@ void MetaInfo::readXML(QString filename){
     file.close();
 
     // parse items
-    QDomNodeList itemNodes = doc.elementsByTagName('item');
+    QDomNodeList itemNodes = doc.elementsByTagName("item");
     int itemCount = itemNodes.length();
     for (int i=0; i<itemCount; i++){
         QDomNode node = itemNodes.at(i);
@@ -90,9 +90,10 @@ void MetaInfo::readXML(QString filename){
         int childrenCount = children.length();
         for (int j=0; j<childrenCount; j++){
             QDomNode node = children.at(j);
-            if (node.nodeName == "title")title = node.nodeValue();
-            if (node.nodeName == "img")title = img.nodeValue();
-            if (node.nodeName == "text")title = text.nodeValue();
+            QString name = node.nodeName();
+            if (name == "title") title = node.nodeValue();
+            if (name == "img") img = node.nodeValue();
+            if (name == "text") text = node.nodeValue();
         }
 
         MetaItem * item = new MetaItem(title, img, text);
@@ -100,7 +101,7 @@ void MetaInfo::readXML(QString filename){
     }
 
     // parse entries
-    QDomNodeList entryNodes = doc.elementsByTagName('entry')
+    QDomNodeList entryNodes = doc.elementsByTagName("entry");
     int entryCount = entryNodes.length();
     for (int i=0; i<entryCount; i++){
         QDomNode node = entryNodes.at(i);

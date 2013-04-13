@@ -19,6 +19,7 @@ SOURCES = \
     main.cpp \
     MetaEntry.cpp \
     MetaItem.cpp \
+    Overlay.cpp \
     VideoPlayer.cpp
 
 QT += widgets

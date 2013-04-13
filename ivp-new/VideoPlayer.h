@@ -18,14 +18,14 @@ class VideoPlayer : public QWidget
 {
     Q_OBJECT
 public:
-    VideoPlayer(QWidget *parent = 0, Overlay* _overlay);
+    VideoPlayer(QWidget *parent, Overlay* _overlay);
     ~VideoPlayer();
     QSize sizeHint() const;
 
 protected:
     void resizeEvent(QResizeEvent *e);
 
-public signals:
+signals:
     /*
      * Emit playTo to tell MetaInfo change of position while playing
      * so that overlay infomations can be updated

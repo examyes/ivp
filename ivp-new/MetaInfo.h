@@ -17,7 +17,7 @@ public:
     MetaInfo();
     ~MetaInfo();
 
-public signals:
+signals:
     /*
      * Emit begin if a new overlay box should appear at current playing position 
      */

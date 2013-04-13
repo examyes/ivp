@@ -1,8 +1,8 @@
 #include "MetaEntry.h"
 
 MetaEntry::MetaEntry(
-            long long _timeStart,
-            long long _timeStop,
+            int _timeStart,
+            int _timeStop,
             double _top,
             double _left,
             double _width,

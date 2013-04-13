@@ -12,7 +12,7 @@ public:
     Overlay(QWidget *parent = 0);
     ~Overlay();
 
-public signals:
+signals:
     /*
      * Emit clicked if an overlay box is clicked
      * to tell sidebar to update and show
