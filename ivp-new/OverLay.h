@@ -11,7 +11,6 @@ class Overlay : public QWidget
 public:
     Overlay(QWidget *parent = 0);
     ~Overlay();
-    QSize sizeHint() const;
 
 public signals:
     /*

@@ -5,8 +5,8 @@ class MetaEntry{
 
 public:
     explicit MetaEntry(
-            long long _timeStart,
-            long long _timeStop,
+            int _timeStart,
+            int _timeStop,
             double _top,
             double _left,
             double _width,
@@ -14,7 +14,7 @@ public:
             int _itemId
             );
 
-    const long long timeStart, timeStop;//in millisecond
+    const int timeStart, timeStop;//in millisecond
     const double top, left, width, height;
     const int itemId;
 }

@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-#include "MediaItem.h"
+#include "MetaItem.h"
 
 class SideBar : public QScrollArea
 {
@@ -20,7 +20,7 @@ public slots:
     /*
      * Update information on the sidebar
      */
-    void showItem(MediaItem* item);
+    void showItem(MetaItem* item);
 
 
 private:

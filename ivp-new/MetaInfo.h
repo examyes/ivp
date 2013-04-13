@@ -1,6 +1,10 @@
 #ifndef METAINFO_H
 #define METAINFO_H
 
+#include <vector>
+#include <map>
+using namespace std;
+
 #include <QtWidgets/QWidget>
 
 #include "MetaEntry.h"
@@ -10,9 +14,8 @@ class MetaInfo : public QObject
 {
     Q_OBJECT
 public:
-    MetaInfo(QWidget *parent = 0);
+    MetaInfo();
     ~MetaInfo();
-    QSize sizeHint() const;
 
 public signals:
     /*
@@ -61,7 +64,13 @@ public slots:
 private slots:
 
 private:
+    vector<MetaEntry*> entries;
+    map<int, MetaItem*> items;
 
+    void readXML(QString filename);
+    int parseTime(QString time);
+
+    int beginIndex, endIndex;
 };
 
 #endif

@@ -30,15 +30,18 @@ protected:
     void createWidgets();
     void createActions();
     void createMenus();
+    void createConnections();
 
 private:
     QAction *openAction;
+    QAction *exitAction;
 
     QMenu *fileMenu;
 
     VideoPlayer* videoPlayer;
     SideBar* sideBar;
     Overlay* overlay;
+    MetaInfo* meta;
 
 };
 

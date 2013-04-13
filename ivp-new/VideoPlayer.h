@@ -22,6 +22,8 @@ public:
     ~VideoPlayer();
     QSize sizeHint() const;
 
+protected:
+    void resizeEvent(QResizeEvent *e);
 
 public signals:
     /*
@@ -41,6 +43,8 @@ public slots:
      * open video file and prepare to play
      */
     void open(QString fileName);
+    //QSize resolution = media.canonicalResource().resolution();
+
 
 
 private slots:
@@ -56,6 +60,11 @@ private:
     QAbstractButton *playButton;
     QSlider *positionSlider;
     Overlay *overlay;
+    QSize *videoSize;
+    QVideoWidget *videoWidget;
+
+
+    void resizeOverlay();
     //QLabel *errorLabel;
 };
 
