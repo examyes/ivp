@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include <QFileDialog>
+#include <QMediaContent>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent) {

@@ -5,6 +5,8 @@
 
 #include <QtGui/QMovie>
 #include <QtWidgets/QWidget>
+#include <QGraphicsView>
+#include <QGraphicsVideoItem>
 
 #include "Overlay.h"
 
@@ -60,8 +62,12 @@ private:
     QAbstractButton *playButton;
     QSlider *positionSlider;
     Overlay *overlay;
-    QSize *videoSize;
-    QVideoWidget *videoWidget;
+    QSize videoSize;
+    //QVideoWidget *videoWidget;
+    // test
+    QGraphicsView *videoView;
+    QGraphicsVideoItem *videoItem;
+    QGraphicsScene *scene;
 
 
     void layoutChildren();

@@ -8,11 +8,23 @@ VideoPlayer::VideoPlayer(QWidget *parent, Overlay* _overlay)
     : QWidget(parent)
     , mediaPlayer(0, QMediaPlayer::VideoSurface)
     , playButton(0)
-    , positionSlider(0) {
+    , positionSlider(0)
+{
+
 
     // video widget
-    videoWidget = new QVideoWidget(this);
-    videoWidget->setAttribute(Qt::WA_TranslucentBackground);
+
+    videoView = new QGraphicsView(this);
+    scene = new QGraphicsScene(videoView);
+    videoView->setScene(scene);
+
+    videoItem = new QGraphicsVideoItem;
+    mediaPlayer.setVideoOutput(videoItem);
+
+    scene->addItem(videoItem);
+
+    //videoWidget = new QVideoWidget(this);
+    //videoWidget->setAttribute(Qt::WA_TranslucentBackground);
 
     // playbutton
     playButton = new QPushButton(this);
@@ -49,12 +61,11 @@ VideoPlayer::VideoPlayer(QWidget *parent, Overlay* _overlay)
     Pal.setColor(QPalette::Background, Qt::red);
     overlay->setAutoFillBackground(true);
     overlay->setPalette(Pal);
-    overlay->setParent(videoWidget);
+    overlay->setParent(this);
     overlay->show();
 
     // media player setup
-    videoSize = new QSize(0,0);
-    mediaPlayer.setVideoOutput(videoWidget);
+    //mediaPlayer.setVideoOutput(videoWidget);
     connect(&mediaPlayer, SIGNAL(stateChanged(QMediaPlayer::State)),
             this, SLOT(mediaStateChanged(QMediaPlayer::State)));
     connect(&mediaPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
@@ -63,22 +74,18 @@ VideoPlayer::VideoPlayer(QWidget *parent, Overlay* _overlay)
 }
 
 VideoPlayer::~VideoPlayer() {
-    delete videoSize;
 }
 
 void VideoPlayer::open(QString fileName)
 {
     if (!fileName.isEmpty()) {
+
         mediaPlayer.setMedia(QUrl::fromLocalFile(fileName));
         playButton->setEnabled(true);
 
-        // get video size
-        delete videoSize;
-        QSize s = mediaPlayer.media().canonicalResource().resolution();
-        videoSize = new QSize(s.width(), s.height());
-
         // resize overlay
         resizeOverlay();
+        layoutChildren();
     }
 }
 
@@ -87,30 +94,39 @@ void VideoPlayer::layoutChildren(){
     QSize buttonSize = playButton->sizeHint();
     QSize sliderSize = positionSlider->sizeHint();
 
-    int bottomHeight = buttonSize.height();
-    int sliderOffset = (bottomHeight - sliderSize.height()) / 2;
+    int bottomHeight = buttonSize.height() + sliderSize.height();
+    int buttonLeft = (mysize.width() - buttonSize.width()) / 2;
 
-    playButton->move(0, mysize.height() - bottomHeight);
-    positionSlider->setGeometry(buttonSize.width(), mysize.height() - bottomHeight + sliderOffset,
-            mysize.width() - buttonSize.width(), sliderSize.height());
-    videoWidget->setGeometry(0, 0, mysize.width(), mysize.height() - bottomHeight);
+    playButton->move(buttonLeft, mysize.height() - buttonSize.height());
+    positionSlider->setGeometry(0, mysize.height() - bottomHeight,
+            mysize.width(), sliderSize.height());
 
-    videoWidget->lower();
+    videoItem->setOffset(QPointF());
+    videoView->setGeometry(0, 0, mysize.width(), mysize.height() - bottomHeight);
+
+    videoView->lower();
 }
 
 void VideoPlayer::resizeOverlay(){
-    QSize playerSize = videoWidget->size();
-    Qt::AspectRatioMode mode = videoWidget->aspectRatioMode();
+    QSizeF s = videoItem->nativeSize();
+    QSize videoSize = QSize(int(s.width()), int(s.height()));
 
-    QSize overlaySize(videoSize->width(), videoSize->height());
+    QSize playerSize = videoView->size();
+    Qt::AspectRatioMode mode = videoItem->aspectRatioMode();
+
+    QSize overlaySize(videoSize.width(), videoSize.height());
     overlaySize.scale(playerSize, mode);
 
     int left = (playerSize.width() - overlaySize.width()) / 2;
     int top = (playerSize.height() - overlaySize.height()) / 2;
 
-    overlay->setGeometry(left, top+20, overlaySize.width(), overlaySize.height());
+    videoItem->setOffset(QPointF(left, top));
+    videoItem->setSize(QSizeF(overlaySize.width(), overlaySize.height()));
+
+    overlay->setGeometry(left, top, overlaySize.width(), overlaySize.height());
     overlay->raise();
 
+    printf("video size :%d %d\n", videoSize.width(), videoSize.height());
     printf("Overlay resize: %d %d %d %d\n", left, top, overlaySize.width(), overlaySize.height());
 }
 
@@ -146,6 +162,7 @@ void VideoPlayer::mediaStateChanged(QMediaPlayer::State state) {
 
 void VideoPlayer::positionChanged(qint64 position) {
     positionSlider->setValue(position);
+    resizeOverlay();
     emit playTo(position);
 }
 
