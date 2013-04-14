@@ -64,6 +64,7 @@ private:
     QVideoWidget *videoWidget;
 
 
+    void layoutChildren();
     void resizeOverlay();
     //QLabel *errorLabel;
 };
