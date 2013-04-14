@@ -1,6 +1,9 @@
 #ifndef OVERLAY_H
 #define OVERLAY_H
 
+#include <map>
+using namespace std;
+
 #include <QtWidgets/QWidget>
 
 #include "MetaEntry.h"
@@ -28,7 +31,7 @@ public slots:
     /*
      * add a new overlay box based on the entry
      */
-    void show(MetaEntry* entry);
+    void showEntry(MetaEntry* entry);
     /*
      * remove the overlay box showing the entry
      */
@@ -42,6 +45,8 @@ public slots:
 private slots:
 
 private:
+
+    map<MetaEntry*, QWidget*> boxes;
 
 };
 

@@ -65,7 +65,7 @@ void MainWindow::createConnections(){
     connect(this, SIGNAL(openFile(QString)), meta, SLOT(open(QString)));
 
 
-    connect(meta, SIGNAL(begin(MetaEntry*)), overlay, SLOT(show(MetaEntry*)));
+    connect(meta, SIGNAL(begin(MetaEntry*)), overlay, SLOT(showEntry(MetaEntry*)));
     connect(meta, SIGNAL(end(MetaEntry*)), overlay, SLOT(hide(MetaEntry*)));
     connect(meta, SIGNAL(reset()), overlay, SLOT(hideAll()));
 
