@@ -56,7 +56,8 @@ void MainWindow::open() {
 
     QString filename = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
 
-    emit openFile(filename);
+    if (!filename.isEmpty())
+        emit openFile(filename);
 }
 
 void MainWindow::createConnections(){
@@ -69,7 +70,7 @@ void MainWindow::createConnections(){
     connect(meta, SIGNAL(reset()), overlay, SLOT(hideAll()));
 
 
-    connect(meta, SIGNAL(show(MetaItem*)), sideBar, SLOT(show(MetaItem*)));
+    connect(meta, SIGNAL(show(MetaItem*)), sideBar, SLOT(showItem(MetaItem*)));
 
     connect(overlay, SIGNAL(clicked(MetaEntry*)), meta, SLOT(select(MetaEntry*)));
     connect(overlay, SIGNAL(clickedBlank()), sideBar, SLOT(hide()));

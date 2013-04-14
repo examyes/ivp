@@ -103,9 +103,11 @@ void VideoPlayer::mediaStateChanged(QMediaPlayer::State state) {
     switch(state) {
     case QMediaPlayer::PlayingState:
         playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+        emit seekTo(0);
         break;
     default:
         playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+        emit seekTo(0);
         break;
     }
 }

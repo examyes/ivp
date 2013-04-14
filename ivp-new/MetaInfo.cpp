@@ -26,6 +26,7 @@ void MetaInfo::seekTo(int millisecond){
 }
 
 void MetaInfo::playTo(int millisecond){
+    printf("Play to %d\n", millisecond);
     while (beginIndex < entries.size() && (entries.at(beginIndex))->timeStart <= millisecond){
         emit begin(entries.at(beginIndex));
         beginIndex ++;
@@ -52,16 +53,20 @@ void MetaInfo::open(QString filename){
 
     // get xml file path
     QFileInfo info = QFileInfo(filename);
-    QString path = info.filePath();
+    QDir dir = info.dir();
     QString name = info.completeBaseName();
-    QString xmlFilename = path + name + ".xml";
+    QString xmlFilename = name + ".xml";
 
     // test file exist
-    QFileInfo xmlInfo(xmlFilename);
-    if (!xmlInfo.exists()) return;
+    QFileInfo xmlInfo(dir, xmlFilename);
+    if (!xmlInfo.exists()){
+        printf("File not there\n");
+        printf("Filename: %s\n", xmlFilename.toStdString().c_str());
+        return;
+    }
 
     // read xml file
-    readXML(xmlFilename);
+    readXML(xmlInfo.filePath());
 
     // resetFlags
     beginIndex = 0;
@@ -69,18 +74,26 @@ void MetaInfo::open(QString filename){
 }
 
 void MetaInfo::readXML(QString filename){
+    printf("Read XML File: %s\n", filename.toStdString().c_str());
     // create dom document
     QDomDocument doc("video meta info"); 
 
     // load file
     QFile file(filename);
-    if (!file.open(QIODevice::ReadOnly)) return;
-    if (!doc.setContent(&file)) { file.close(); return; }
+    if (!file.open(QIODevice::ReadOnly)){
+        printf("Cannot open file for reading\n");
+        return;
+    }
+    if (!doc.setContent(&file)) {
+        printf("Cannot setContent\n");
+        file.close(); return; 
+    }
     file.close();
 
     // parse items
     QDomNodeList itemNodes = doc.elementsByTagName("item");
     int itemCount = itemNodes.length();
+    printf("%d items\n", itemCount);
     for (int i=0; i<itemCount; i++){
         QDomNode node = itemNodes.at(i);
         int id = node.attributes().namedItem("id").nodeValue().toInt();
@@ -91,18 +104,20 @@ void MetaInfo::readXML(QString filename){
         for (int j=0; j<childrenCount; j++){
             QDomNode node = children.at(j);
             QString name = node.nodeName();
-            if (name == "title") title = node.nodeValue();
-            if (name == "img") img = node.nodeValue();
-            if (name == "text") text = node.nodeValue();
+            if (name == "title") title = node.toElement().text();
+            if (name == "img") img = node.toElement().text();
+            if (name == "text") text = node.toElement().text();
         }
 
         MetaItem * item = new MetaItem(title, img, text);
         items[id] = item;
+        printf("Item %s\n", title.toStdString().c_str());
     }
 
     // parse entries
     QDomNodeList entryNodes = doc.elementsByTagName("entry");
     int entryCount = entryNodes.length();
+    printf("%d entries\n", entryCount);
     for (int i=0; i<entryCount; i++){
         QDomNode node = entryNodes.at(i);
         QString timestart = node.attributes().namedItem("timestart").nodeValue();
@@ -112,13 +127,14 @@ void MetaInfo::readXML(QString filename){
         double width = node.attributes().namedItem("width").nodeValue().toDouble();
         double height = node.attributes().namedItem("height").nodeValue().toDouble();
 
-        int id = node.nodeValue().toInt();
+        int id = node.toElement().text().toInt();
 
         MetaEntry* entry = new MetaEntry(parseTime(timestart),
                 parseTime(timestop),
                 top, left, width, height, id);
 
         entries.push_back(entry);
+        printf("Entry %d: %s-%s\n", id, timestart.toStdString().c_str(),timestop.toStdString().c_str());
     }
 }
 

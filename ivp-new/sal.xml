@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+    <author></author>
+    <date></date>
+    <title></title>
+    <tags>
+        <entry timestart="00:00:01:000" timestop="00:00:02" top="0.1" left="0.5" width="0.1" height="0.1">1</entry>
+        <entry timestart="00:00:02:000" timestop="00:00:03" top="0.1" left="0.5" width="0.1" height="0.1">2</entry>
+        <entry timestart="00:00:03:000" timestop="00:00:04" top="0.1" left="0.5" width="0.1" height="0.1">3</entry>
+        <entry timestart="00:00:04:000" timestop="00:00:05" top="0.1" left="0.5" width="0.1" height="0.1">4</entry>
+    </tags>
+    <data>
+        <item id="1">
+            <title>abc</title>
+            <img src="http://xxx">name</img>
+            <text>blah blah</text>
+        </item>
+        <item id="2">
+            <title>abc</title>
+            <img src="http://xxx">name</img>
+            <text>blah blah</text>
+        </item>
+        <item id="3">
+            <title>abc</title>
+            <img src="http://xxx">name</img>
+            <text>blah blah</text>
+        </item>
+        <item id="4">
+            <title>abc</title>
+            <img src="http://xxx">name</img>
+            <text>blah blah</text>
+        </item>
+    </data>
+</meta>

@@ -1,7 +1,8 @@
 TEMPLATE = app
 TARGET = ivp
 
-QT += multimedia multimediawidgets
+# QT += multimedia 
+QT += multimediawidgets
 
 HEADERS = \
     MainWindow.h \
