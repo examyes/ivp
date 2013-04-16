@@ -2,6 +2,7 @@
 #define OVERLAY_H
 
 #include <map>
+#include <QMouseEvent>
 using namespace std;
 
 #include <QtWidgets/QWidget>
@@ -14,6 +15,9 @@ class Overlay : public QWidget
 public:
     Overlay(QWidget *parent = 0);
     ~Overlay();
+
+protected:
+    void mouseMoveEvent (QMouseEvent * event);
 
 signals:
     /*
@@ -47,6 +51,9 @@ private slots:
 private:
 
     map<MetaEntry*, QWidget*> boxes;
+
+    int mouseX;
+    int mouseY;
 
 };
 
