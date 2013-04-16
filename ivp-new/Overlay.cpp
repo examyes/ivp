@@ -22,12 +22,11 @@ void Overlay::showEntry(MetaEntry* entry){
     int w = this->size().width(), h = this->size().height();
     int boxW = entry->width * w, boxH = entry->height * h, boxX = entry->left * w, boxY = entry->top * h;
 
-    // set position
-    box->setGeometry(boxX, boxY, boxW, boxH);
-
     if(mouseX >= boxX && mouseX <= boxX+boxW)
-        if(mouseY >= boxY && mouseY <= boxY+boxH)
+        if(mouseY >= boxY && mouseY <= boxY+boxH){
+            box->setGeometry(boxX, boxY, boxW, boxH);
             box->show();
+        }
 
     boxes[entry] = box;
 
@@ -72,6 +71,31 @@ void Overlay::mouseMoveEvent ( QMouseEvent * event ) {
         else{
             box->hide();
         }
+    }
+
+}
+
+void Overlay::mouseReleaseEvent (QMouseEvent * event){
+    mouseX = event->x();
+    mouseY = event->y();
+
+    bool inBox = false;
+
+    for(map<MetaEntry*, QWidget*>::iterator it= boxes.begin(); it!= boxes.end(); it++){
+        MetaEntry* entry = it->first;
+        QWidget* box = it->second;
+
+        int w = this->size().width(), h = this->size().height();
+        int boxW = entry->width * w, boxH = entry->height * h, boxX = entry->left * w, boxY = entry->top * h;
+
+        if(mouseX >= boxX && mouseX <= boxX+boxW &&
+            mouseY >= boxY && mouseY <= boxY+boxH){
+                inBox = true;
+                emit clicked(entry);
+            }
+
+        if (!inBox)
+            emit clickedBlank();
     }
 
 }

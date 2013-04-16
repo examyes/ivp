@@ -57,10 +57,12 @@ VideoPlayer::VideoPlayer(QWidget *parent, Overlay* _overlay)
     // overlay
 
     overlay = _overlay;
+    /*
     QPalette Pal(palette());
     Pal.setColor(QPalette::Background, Qt::red);
     overlay->setAutoFillBackground(true);
     overlay->setPalette(Pal);
+    */
     overlay->setParent(this);
     overlay->show();
 
