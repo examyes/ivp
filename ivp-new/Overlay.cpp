@@ -2,6 +2,7 @@
 
 Overlay::Overlay(QWidget *parent):QWidget(parent){
     boxes.clear();
+    this->setMouseTracking(true);
 }
 
 Overlay::~Overlay(){
@@ -13,7 +14,7 @@ void Overlay::showEntry(MetaEntry* entry){
 
     // background color
     QPalette Pal(palette());
-    Pal.setColor(QPalette::Background, Qt::red);
+    Pal.setColor(QPalette::Background, QColor(255, 0, 0, 70));
     box->setAutoFillBackground(true);
     box->setPalette(Pal);
 
@@ -23,7 +24,10 @@ void Overlay::showEntry(MetaEntry* entry){
 
     // set position
     box->setGeometry(boxX, boxY, boxW, boxH);
-    box->show();
+
+    if(mouseX >= boxX && mouseX <= boxX+boxW)
+        if(mouseY >= boxY && mouseY <= boxY+boxH)
+            box->show();
 
     boxes[entry] = box;
 
@@ -48,3 +52,9 @@ void Overlay::hideAll(){
 
     printf("Hide all\n");
 }
+
+void Overlay::mouseMoveEvent ( QMouseEvent * event ) {
+    mouseX = event->x();
+    mouseY = event->y();
+}
+
