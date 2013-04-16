@@ -3,23 +3,24 @@
 SideBar::SideBar(QWidget *parent) :
     QScrollArea(parent)
 {
-    setBackgroundRole(QPalette::Dark);
+    //setBackgroundRole(QPalette::Dark);
+    setStyleSheet( "SideBar { border-style: none}" );
 
-    title = new QLabel("");
-    text = new QLabel("");
+    sidebarWidget = new QWidget(this);
+    sidebarWidget->setFixedWidth(290);
 
-    QVBoxLayout* sidebarLayout = new QVBoxLayout();
-    sidebarLayout->addWidget(title);
-    sidebarLayout->addWidget(text);
+    title = new QLabel("", sidebarWidget);
+    title->setWordWrap(true);
 
-    QWidget* sidebarWidget = new QWidget(this);
-    sidebarWidget->setLayout(sidebarLayout);
+    text = new QLabel("", sidebarWidget);
+    text->setWordWrap(true);
 
     setWidget(sidebarWidget);
 
     setMinimumWidth(300);
     setMaximumWidth(300);
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
+
 }
 
 QSize SideBar::sizeHint() const{
@@ -27,9 +28,17 @@ QSize SideBar::sizeHint() const{
 }
 
 void SideBar::showItem(MetaItem* item){
-    title->setText(item->title);
+    title->setText("<big>" + item->title + "</big>");
+    title->setGeometry(0, 0, 280, title->heightForWidth(280)+20);
+    title->show();
+
     text->setText(item->text);
-    this->show();
+    text->setGeometry(0, title->size().height()+10, 280, text->heightForWidth(280)+20);
+    text->show();
+
+    sidebarWidget->setFixedHeight(title->size().height() + text->size().height() + 50);
+
+    show();
 }
 
 SideBar::~SideBar(){

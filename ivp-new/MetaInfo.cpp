@@ -26,7 +26,7 @@ void MetaInfo::seekTo(int millisecond){
 }
 
 void MetaInfo::playTo(int millisecond){
-    printf("Play to %d\n", millisecond);
+    //printf("Play to %d\n", millisecond);
     while (beginIndex < entries.size() && (entries.at(beginIndex))->timeStart <= millisecond){
         emit begin(entries.at(beginIndex));
         beginIndex ++;

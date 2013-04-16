@@ -26,6 +26,7 @@ public slots:
 private:
     QLabel *text;
     QLabel *title;
+    QWidget *sidebarWidget;
 };
 
 #endif // SIDEBAR_H

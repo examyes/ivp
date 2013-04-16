@@ -14,7 +14,7 @@ void Overlay::showEntry(MetaEntry* entry){
 
     // background color
     QPalette Pal(palette());
-    Pal.setColor(QPalette::Background, QColor(255, 0, 0, 70));
+    Pal.setColor(QPalette::Background, QColor(255, 255, 255, 30));
     box->setAutoFillBackground(true);
     box->setPalette(Pal);
 
@@ -30,8 +30,8 @@ void Overlay::showEntry(MetaEntry* entry){
 
     boxes[entry] = box;
 
-    printf("Show %d\n", entry->itemId);
-    printf("box %d %d %d %d\n", boxX, boxY, boxW, boxH);
+    //printf("Show %d\n", entry->itemId);
+    //printf("box %d %d %d %d\n", boxX, boxY, boxW, boxH);
 }
 
 void Overlay::hide(MetaEntry* entry){
@@ -40,7 +40,7 @@ void Overlay::hide(MetaEntry* entry){
     delete box;
     boxes.erase(entry);
 
-    printf("Hide %d\n", entry->itemId);
+    //printf("Hide %d\n", entry->itemId);
 }
 
 void Overlay::hideAll(){
@@ -49,7 +49,7 @@ void Overlay::hideAll(){
         delete (it->second);
     boxes.clear();
 
-    printf("Hide all\n");
+    //printf("Hide all\n");
 }
 
 void Overlay::mouseMoveEvent ( QMouseEvent * event ) {
@@ -94,9 +94,10 @@ void Overlay::mouseReleaseEvent (QMouseEvent * event){
                 emit clicked(entry);
             }
 
-        if (!inBox)
-            emit clickedBlank();
     }
+
+    if (!inBox)
+        emit clickedBlank();
 
 }
 
