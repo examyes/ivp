@@ -2,9 +2,22 @@
 
 #include <QtXml>
 
+struct compareBegin {
+    inline bool operator() (const MetaEntry* entry1, const MetaEntry* entry2) {
+        return (entry1->timeStart < entry2->timeStart);
+    }
+};
+
+struct compareEnd {
+    inline bool operator() (const MetaEntry* entry1, const MetaEntry* entry2) {
+        return (entry1->timeStop < entry2->timeStop);
+    }
+};
+
 MetaInfo::MetaInfo(){
     items.clear();
-    entries.clear();
+    entriesSortedBegin.clear();
+    entriesSortedEnd.clear();
 }
 
 MetaInfo::~MetaInfo(){
@@ -14,25 +27,27 @@ void MetaInfo::seekTo(int millisecond){
     emit reset();
     beginIndex = 0;
     endIndex = 0;
-    //playTo(millisecond);
-    while (beginIndex < entries.size() && (entries.at(beginIndex))->timeStart <= millisecond)
+    playTo(millisecond);
+    /*
+    while (beginIndex < entriesSortedBegin.size() && (entriesSortedBegin.at(beginIndex))->timeStart <= millisecond)
         beginIndex ++;
 
-    while (endIndex < entries.size() && (entries.at(endIndex))->timeStop <= millisecond)
+    while (endIndex < entriesSortedEnd.size() && (entriesSortedEnd.at(endIndex))->timeStop <= millisecond)
         endIndex ++;
 
     for (int i = endIndex; i < beginIndex; i++)
         emit begin(entries.at(i));
+    */
 }
 
 void MetaInfo::playTo(int millisecond){
     //printf("Play to %d\n", millisecond);
-    while (beginIndex < entries.size() && (entries.at(beginIndex))->timeStart <= millisecond){
-        emit begin(entries.at(beginIndex));
+    while (beginIndex < entriesSortedBegin.size() && (entriesSortedBegin.at(beginIndex))->timeStart <= millisecond){
+        emit begin(entriesSortedBegin.at(beginIndex));
         beginIndex ++;
     }
-    while (endIndex < entries.size() && (entries.at(endIndex))->timeStop <= millisecond){
-        emit end(entries.at(endIndex));
+    while (endIndex < entriesSortedEnd.size() && (entriesSortedEnd.at(endIndex))->timeStop <= millisecond){
+        emit end(entriesSortedEnd.at(endIndex));
         endIndex ++;
     }
 }
@@ -46,10 +61,13 @@ void MetaInfo::open(QString filename){
     // remove existing items and entries
     for(map<int, MetaItem*>::iterator it= items.begin(); it!= items.end(); it++)
         delete (it->second);
-    for(vector<MetaEntry*>::iterator it= entries.begin(); it!= entries.end(); it++)
+    for(vector<MetaEntry*>::iterator it= entriesSortedBegin.begin(); it!= entriesSortedBegin.end(); it++)
+        delete (*it);
+    for(vector<MetaEntry*>::iterator it= entriesSortedEnd.begin(); it!= entriesSortedEnd.end(); it++)
         delete (*it);
     items.clear();
-    entries.clear();
+    entriesSortedBegin.clear();
+    entriesSortedEnd.clear();
 
     // get xml file path
     QFileInfo info = QFileInfo(filename);
@@ -133,9 +151,14 @@ void MetaInfo::readXML(QString filename){
                 parseTime(timestop),
                 top, left, width, height, id);
 
-        entries.push_back(entry);
+        entriesSortedBegin.push_back(entry);
+        entriesSortedEnd.push_back(entry);
         printf("Entry %d: %s-%s\n", id, timestart.toStdString().c_str(),timestop.toStdString().c_str());
     }
+
+    sort(entriesSortedBegin.begin(), entriesSortedBegin.end(), compareBegin());
+    sort(entriesSortedEnd.begin(), entriesSortedEnd.end(), compareEnd());
+
 }
 
 int MetaInfo::parseTime(QString s){

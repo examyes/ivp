@@ -64,7 +64,8 @@ public slots:
 private slots:
 
 private:
-    vector<MetaEntry*> entries;
+    vector<MetaEntry*> entriesSortedBegin;
+    vector<MetaEntry*> entriesSortedEnd;
     map<int, MetaItem*> items;
 
     void readXML(QString filename);
