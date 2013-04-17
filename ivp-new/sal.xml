@@ -10,23 +10,12 @@
     <data>
         <item id="1">
             <title>Tag 1</title>
-            <img src="http://xxx">name</img>
+            <img>https://www.google.com.sg/images/srpr/logo4w.png</img>
             <text>I hope this can be long. So that I can see if text can wrap properly.</text>
         </item>
         <item id="2">
             <title>Tag 2</title>
-            <img src="http://xxx">name</img>
             <text>I want this to be really long. &lt;br&gt; And better if line break works.&lt;br&gt; </text>
-        </item>
-        <item id="3">
-            <title>abc</title>
-            <img src="http://xxx">name</img>
-            <text>blah blah</text>
-        </item>
-        <item id="4">
-            <title>abc</title>
-            <img src="http://xxx">name</img>
-            <text>blah blah</text>
         </item>
     </data>
 </meta>

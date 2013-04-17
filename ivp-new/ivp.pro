@@ -25,3 +25,4 @@ SOURCES = \
 
 QT += widgets
 QT += xml
+QT += network

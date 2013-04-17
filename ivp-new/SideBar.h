@@ -5,6 +5,10 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QByteArray>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
 #include "MetaItem.h"
 
@@ -23,13 +27,21 @@ public slots:
      */
     void showItem(MetaItem* item);
 
+private slots:
+    void imageLoaded(QNetworkReply* reply);
+
 
 private:
     QPushButton *hideButton;
 
     QLabel *text;
     QLabel *title;
+    QLabel *image;
     QWidget *sidebarWidget;
+
+    QNetworkAccessManager webCtrl;
+
+    void loadImage(QString url);
 };
 
 #endif // SIDEBAR_H

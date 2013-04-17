@@ -63,7 +63,12 @@ void MainWindow::createMenus(){
 
 void MainWindow::open() {
 
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
+    QString filename = QFileDialog::getOpenFileName(
+            this,
+            tr("Open Movie"),
+            QString(),
+            tr("Video (*.mov *.mp4)")
+            );
 
     if (!filename.isEmpty())
         emit openFile(filename);
