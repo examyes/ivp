@@ -4,31 +4,33 @@
     <date></date>
     <title></title>
     <tags>
-        <entry timestart="00:00:00:000" timestop="00:00:14" top="0.5" left="0.6" width="0.28" height="0.3">1</entry>
-        <entry timestart="00:00:14:000" timestop="00:00:24" top="0.3" left="0.2" width="0.3" height="0.3">2</entry>
-        <entry timestart="00:00:24:000" timestop="00:00:30" top="0.8" left="0.5" width="0.2" height="0.2">3</entry>
-        <entry timestart="00:00:38:000" timestop="00:00:48" top="0.7" left="0.5" width="0.2" height="0.2">4</entry>
+        <entry timestart="00:00:00:000" timestop="00:00:35" top="0.5" left="0.58" width="0.28" height="0.32">1</entry>
+        <entry timestart="00:00:14:000" timestop="00:00:35" top="0.3" left="0.06" width="0.3" height="0.35">2</entry>
+        <entry timestart="00:00:20:000" timestop="00:00:26" top="0.6" left="0.4" width="0.1" height="0.3">3</entry>
+        <entry timestart="00:00:35:000" timestop="00:00:45" top="0.6" left="0.35" width="0.3" height="0.3">4</entry>
+        <entry timestart="00:00:45:000" timestop="00:00:50" top="0.5" left="0.58" width="0.28" height="0.32">1</entry>
+        <entry timestart="00:00:45:000" timestop="00:00:50" top="0.3" left="0.06" width="0.3" height="0.35">2</entry>
     </tags>
     <data>
         <item id="1">
-            <title>Tag 1</title>
-            <img src="http://xxx">name</img>
-            <text>I hope this can be long. So that I can see if text can wrap properly.</text>
+            <title>He Haocong</title>
+            <img>name</img>
+            <text>He Haocong is a fourth year computer science student at NUS. He likes to work on coding projects and eat different kinds of food in his spear times.</text>
         </item>
         <item id="2">
-            <title>Tag 2</title>
-            <img src="http://xxx">name</img>
-            <text>I want this to be really long. &lt;br&gt; And better if line break works.&lt;br&gt; </text>
+            <title>Sal Amarasinghe</title>
+            <img>name</img>
+            <text>Sal is an engineering exchange student from Canada.  Only here for four months, he's had a great time learning about UI development. &lt;br&gt; &lt;br&gt;In his spare time, he likes to travel, watch TV and play soccer.&lt;br&gt; &lt;br&gt;He is also going to be very sad when he leaves Singapore in 3 weeks so feel free to give him a hug.</text>
         </item>
         <item id="3">
-            <title>abc</title>
-            <img src="http://xxx">name</img>
-            <text>blah blah</text>
+            <title>iPhone 4S</title>
+            <img>name</img>
+            <text>This is an iPhone 4S, which is a touchscreen-based smartphone developed by Apple Inc. It is the fifth generation of the iPhone, succeeding the iPhone 4, and was announced on October 4, 2011. &lt;br&gt;&lt;br&gt;The cost of the iPhone 4S is currently sitting at S$350.00</text>
         </item>
         <item id="4">
-            <title>abc</title>
-            <img src="http://xxx">name</img>
-            <text>blah blah</text>
+            <title>Chua Chong Yun</title>
+            <img>name</img>
+            <text>Yume is a third year computer science student. In her spare time she likes to go to cosplay events and dress up as her favourite cosplay characters.</text>
         </item>
     </data>
 </meta>
