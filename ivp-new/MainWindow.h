@@ -31,6 +31,7 @@ signals:
 
 public slots:
     void open();
+    void about();
 
 protected:
     void createWidgets();
@@ -41,8 +42,10 @@ protected:
 private:
     QAction *openAction;
     QAction *exitAction;
+    QAction *aboutAction;
 
     QMenu *fileMenu;
+    QMenu *helpMenu;
 
     VideoPlayer* videoPlayer;
     SideBar* sideBar;

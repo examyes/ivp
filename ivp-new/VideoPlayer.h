@@ -60,6 +60,7 @@ private slots:
 private:
     QMediaPlayer mediaPlayer;
     QAbstractButton *playButton;
+    QAbstractButton *openButton;
     QSlider *positionSlider;
     Overlay *overlay;
     QSize videoSize;

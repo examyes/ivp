@@ -83,7 +83,6 @@ void Overlay::mouseReleaseEvent (QMouseEvent * event){
 
     for(map<MetaEntry*, QWidget*>::iterator it= boxes.begin(); it!= boxes.end(); it++){
         MetaEntry* entry = it->first;
-        QWidget* box = it->second;
 
         int w = this->size().width(), h = this->size().height();
         int boxW = entry->width * w, boxH = entry->height * h, boxX = entry->left * w, boxY = entry->top * h;
