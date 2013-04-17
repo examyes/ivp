@@ -123,7 +123,7 @@ void MetaInfo::readXML(QString filename){
         QString timestart = node.attributes().namedItem("timestart").nodeValue();
         QString timestop = node.attributes().namedItem("timestop").nodeValue();
         double top = node.attributes().namedItem("top").nodeValue().toDouble();
-        double left = node.attributes().namedItem("top").nodeValue().toDouble();
+        double left = node.attributes().namedItem("left").nodeValue().toDouble();
         double width = node.attributes().namedItem("width").nodeValue().toDouble();
         double height = node.attributes().namedItem("height").nodeValue().toDouble();
 
