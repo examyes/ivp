@@ -28,7 +28,7 @@ void MainWindow::createWidgets(){
 
     setGeometry(100,100,900,500);
 
-    sidebar->hide();
+    //sidebar->hide();
 }
 
 void MainWindow::createActions(){
@@ -42,10 +42,19 @@ void MainWindow::createMenus(){
 
 void MainWindow::open()
 {
-    //errorLabel->setText("");
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
+    if (!fileName.isEmpty()) {
+        mediaPlayer.setMedia(QUrl::fromLocalFile(fileName));
+        playButton->setEnabled(true);
+    }
 
+    //errorLabel->setText("");
+
+    //videoplayer->openFile();
+
+/*
     videoplayer->openFile(fileName);
+    */
 }
 
