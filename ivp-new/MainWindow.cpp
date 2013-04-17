@@ -95,4 +95,5 @@ void MainWindow::createConnections(){
 
     connect(videoPlayer, SIGNAL(playTo(int)), meta, SLOT(playTo(int)));
     connect(videoPlayer, SIGNAL(seekTo(int)), meta, SLOT(seekTo(int)));
+    connect(videoPlayer, SIGNAL(openClick()), this, SLOT(open()));
 }

@@ -4,6 +4,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QPushButton>
 
 #include "MetaItem.h"
 
@@ -24,6 +25,8 @@ public slots:
 
 
 private:
+    QPushButton *hideButton;
+
     QLabel *text;
     QLabel *title;
     QWidget *sidebarWidget;

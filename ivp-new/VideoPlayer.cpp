@@ -29,8 +29,8 @@ VideoPlayer::VideoPlayer(QWidget *parent, Overlay* _overlay)
     //videoView->setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));
 
     // open button
-    openButton = new QPushButton(tr("Open"));
-    connect(openButton, SIGNAL(clicked()), this, SLOT(open()));
+    openButton = new QPushButton(tr("Open"), this);
+    connect(openButton, SIGNAL(clicked()), this, SIGNAL(openClick()));
 
     // playbutton
     playButton = new QPushButton(this);
@@ -92,7 +92,7 @@ void VideoPlayer::layoutChildren(){
     int bottomHeight = buttonSize.height() + sliderSize.height();
     int buttonLeft = (mysize.width() - buttonSize.width()) / 2;
 
-    openButton->move(buttonLeft, mysize.height() - buttonSize.height());
+    openButton->move(0, mysize.height() - buttonSize.height());
     playButton->move(buttonLeft, mysize.height() - buttonSize.height());
     positionSlider->setGeometry(0, mysize.height() - bottomHeight,
             mysize.width(), sliderSize.height());

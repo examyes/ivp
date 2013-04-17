@@ -15,6 +15,9 @@ SideBar::SideBar(QWidget *parent) :
     text = new QLabel("", sidebarWidget);
     text->setWordWrap(true);
 
+    hideButton = new QPushButton(tr("Hide Sidebar"), this);
+    connect(hideButton, SIGNAL(clicked()), this, SLOT(hide()));
+
     setWidget(sidebarWidget);
 
     setMinimumWidth(300);
@@ -28,15 +31,17 @@ QSize SideBar::sizeHint() const{
 }
 
 void SideBar::showItem(MetaItem* item){
+    hideButton->move(180,0);
+
     title->setText("<big>" + item->title + "</big>");
-    title->setGeometry(0, 0, 280, title->heightForWidth(280)+20);
+    title->setGeometry(0, 40, 280, title->heightForWidth(280)+20);
     title->show();
 
     text->setText(item->text);
-    text->setGeometry(0, title->size().height()+10, 280, text->heightForWidth(280)+20);
+    text->setGeometry(0, title->size().height()+50, 280, text->heightForWidth(280)+20);
     text->show();
 
-    sidebarWidget->setFixedHeight(title->size().height() + text->size().height() + 50);
+    sidebarWidget->setFixedHeight(title->size().height() + text->size().height() + 90);
 
     show();
 }

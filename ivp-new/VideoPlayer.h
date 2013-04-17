@@ -40,6 +40,8 @@ signals:
      */
     void seekTo(int millisecond);
 
+    void openClick();
+
 public slots:
     /*
      * open video file and prepare to play
