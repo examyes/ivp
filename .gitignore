@@ -1,20 +1,26 @@
-# C++ objects and libs
 
-*.slo
-*.lo
 *.o
-*.a
-*.la
-*.lai
-*.so
-*.dll
-*.dylib
 
-# Qt-es
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/Makefile
 
-*.pro.user
-*.pro.user.*
-moc_*.cpp
-qrc_*.cpp
-Makefile
-*-build-*
+*.plist
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/ivp.app/Contents/MacOS/ivp
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/ivp.app/Contents/PkgInfo
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/moc_MainWindow.cpp
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/ivp.app/Contents/Resources/empty.lproj
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/moc_Overlay.cpp
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/moc_MetaInfo.cpp
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/moc_VideoPlayer.cpp
+
+ivp-build-Desktop_Qt_5_0_0_clang_64bit_SDK-Debug/moc_SideBar.cpp
+
+ivp-new/ivp.pro.user
+
+videowidget.pro.user
