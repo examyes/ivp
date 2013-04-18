@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+    <author></author>
+    <date></date>
+    <title></title>
+    <tags>
+        <entry timestart="00:00:00" timestop="00:00:35" top="0.5" left="0.58" width="0.28" height="0.32">1</entry>
+        <entry timestart="00:00:14" timestop="00:00:35" top="0.3" left="0.06" width="0.3" height="0.35">2</entry>
+        <entry timestart="00:00:25" timestop="00:00:31" top="0.6" left="0.4" width="0.1" height="0.3">3</entry>
+        <entry timestart="00:00:35" timestop="00:00:45" top="0.6" left="0.35" width="0.3" height="0.3">4</entry>
+        <entry timestart="00:00:45" timestop="00:00:50" top="0.5" left="0.58" width="0.28" height="0.32">1</entry>
+        <entry timestart="00:00:45" timestop="00:00:50" top="0.3" left="0.06" width="0.3" height="0.35">2</entry>
+    </tags>
+    <data>
+        <item id="1">
+            <title>He Haocong</title>
+            <img></img>
+            <text>He Haocong is a fourth year computer science student at NUS. He likes to work on coding projects and eat different kinds of food in his spare time.</text>
+        </item>
+        <item id="2">
+            <title>Sal Amarasinghe</title>
+            <img></img>
+            <text>Sal is an engineering exchange student from Canada.  Only here for four months, he's had a great time learning about UI development. &lt;br&gt; &lt;br&gt;In his spare time, he likes to travel, watch TV and play soccer.&lt;br&gt; &lt;br&gt;He is also going to be very sad when he leaves Singapore in 3 weeks so feel free to give him a hug.</text>
+        </item>
+        <item id="3">
+            <title>iPhone 4S</title>
+            <img>http://km.support.apple.com/library/APPLE/APPLECARE_ALLGEOS/HT3939/HT3939-iphone_4-front_and_back-001-en.png</img>
+            <text>This is an iPhone 4S, which is a touchscreen-based smartphone developed by Apple Inc. It is the fifth generation of the iPhone, succeeding the iPhone 4, and was announced on October 4, 2011. &lt;br&gt;&lt;br&gt;The cost of the iPhone 4S is currently sitting at S$350.00.
+
+            &lt;br&gt;&lt;br&gt;
+             &lt;a href="http://store.apple.com/sg/buy/home/shop_iphone/family/iphone5"&gt;Click here to buy&lt;&#92;a&gt;</text>
+        </item>
+        <item id="4">
+            <title>Chua Chong Yun</title>
+            <img></img>
+            <text>Yume is a third year computer science student. In her spare time she likes to go to cosplay events and dress up as her favourite cosplay characters.</text>
+        </item>
+    </data>
+</meta>
